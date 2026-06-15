@@ -10,4 +10,9 @@ class Sector extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function units()
+    {
+        return $this->hasMany(Unit::class);
+    }
 }

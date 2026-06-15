@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\AttachmentPlace;
 use App\Models\Government;
+use App\Models\Place;
 use App\Models\Sector;
 use App\Models\Soldier;
 use App\Models\Specialtie;
@@ -105,6 +107,8 @@ class SoldierFactory extends Factory
             'notes' => fake()->optional()->sentence(),
 
             'attendance' => fake()->boolean(95),
+
+            'attachment_id' => Place::inRandomOrder()->value('id'),
         ];
     }
 }

@@ -59,15 +59,18 @@ return new class extends Migration
 
             $table->boolean('attendance')->default(true);     // التمام
 
+            $table->unsignedBigInteger('attachment_id')->nullable();       // مكان الالحاق
+
             // attachment place
 
             $table->timestamps();
 
-            $table->foreign('sector_id')->references('id')->on('sectors');
-            $table->foreign('unit_id')->references('id')->on('units');
-            $table->foreign('weapon_id')->references('id')->on('weapons');
-            $table->foreign('governorate_id')->references('id')->on('governments');
-            $table->foreign('specialization_id')->references('id')->on('specialties');
+            $table->foreign('sector_id')->references('id')->on('sectors')->onDelete('SET NULL');
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('SET NULL');
+            $table->foreign('weapon_id')->references('id')->on('weapons')->onDelete('SET NULL');
+            $table->foreign('governorate_id')->references('id')->on('governments')->onDelete('SET NULL');
+            $table->foreign('specialization_id')->references('id')->on('specialties')->onDelete('SET NULL');
+            $table->foreign('attachment_id')->references('id')->on('places')->onDelete('SET NULL');
 
         });
     }

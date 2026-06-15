@@ -10,4 +10,9 @@ class Unit extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function sector()
+    {
+        return $this->belongsTo(Sector::class);
+    }
 }

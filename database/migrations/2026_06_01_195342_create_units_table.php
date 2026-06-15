@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('sector_id')->nullable();
             $table->string('name')->unique();
             $table->integer('moratab');
             $table->integer('seasa');
@@ -22,6 +23,8 @@ return new class extends Migration
             $table->integer('nesbat_estkmal_seasa');
             $table->integer('nesbat_estkmal_moratab');
             $table->timestamps();
+
+            $table->foreign('sector_id')->references('id')->on('sectors')->onDelete('SET NULL');
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Sector;
 use App\Models\Unit;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -28,6 +29,7 @@ class UnitFactory extends Factory
 
             return [
                 'name' => fake()->unique()->bothify('Unit-###'),
+                'sector_id' => Sector::inRandomOrder()->value('id'),
 
                 'moratab' => $moratab,
                 'seasa' => $seasa,

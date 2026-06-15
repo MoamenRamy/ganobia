@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\AttachmentPlace;
 use App\Models\Government;
+use App\Models\Place;
 use App\Models\Sector;
 use App\Models\Specialtie;
 use App\Models\Unit;
@@ -104,6 +106,8 @@ class VolunteerFactory extends Factory
             'notes' => fake()->optional()->sentence(),
 
             'attendance' => fake()->boolean(90),
+
+            'attachment_id' => Place::inRandomOrder()->value('id'),
         ];
     }
 }
