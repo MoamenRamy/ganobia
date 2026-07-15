@@ -1,116 +1,75 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إجمالي المرحلة</title>
-        <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-<body>
-
-<div class="container">
-    <div class="portlet">
-        <div class="portlet-title">
-            <span>📊</span>
-            <span>إجمالي المرحلة</span>
-        </div>
-
-        <div class="portlet-body">
-            <form class="form-row">
-                <select name="stage">
-                    <option value="0">المرحلة -</option>
-                    <option value="1">المرحلة الأولى</option>
-                    <option value="2">المرحلة الثانية</option>
-                    <option value="3">المرحلة الثالثة</option>
-                </select>
-                <input type="submit" value="عرض">
-            </form>
-
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>السلاح // الوحدة</th>
-                            <th class="title-rotated"><div>الوحدة 1</div></th>
-                            <th class="title-rotated"><div>الوحدة 2</div></th>
-                            <th class="title-rotated"><div>الوحدة 3</div></th>
-                            <th class="title-rotated"><div>الوحدة 4</div></th>
-                            <th class="title-rotated"><div>الوحدة 5</div></th>
-                            <th>الإجمالي</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>اسم السلاح 1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="info">
-                            <td>الإجمالي</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr class="ggray">
-                            <td>ما تم وصولة فعلياً</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr class="section-header">
-                            <td colspan="7">ملاحق بالفرقة</td>
-                        </tr>
-                        <tr class="ggray">
-                            <td>إجمالي الملاحق</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr class="ggray">
-                            <td>القوة</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr class="ggray">
-                            <td>ما تم ترحيله</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                        <tr class="ggray">
-                            <td>المتبقي علي قوة الترحيل</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+@extends('layouts.main')
+@section('content')
+<div class="est-page-container">
+    <div class="est-page-header">
+        <h2>إجمالي المرحلة</h2>
+        <div class="est-controls">
+            <select class="est-stage-select">
+                <option>المرحلة</option>
+                <option>المرحلة الأولى</option>
+                <option>المرحلة الثانية</option>
+                <option>المرحلة الثالثة</option>
+                <option>المرحلة الرابعة</option>
+            </select>
         </div>
     </div>
-</div>
 
-</body>
-</html>
+    <div class="est-table-wrapper">
+        <table class="est-table">
+            <thead>
+                <tr>
+                    <th class="est-label-col">السلاح // الوحدة</th>
+                    <th>الوحدة 1</th>
+                    <th>الوحدة 2</th>
+                    <th>الوحدة 3</th>
+                    <th>الوحدة 4</th>
+                    <th>الوحدة 5</th>
+                    <th class="est-total-col">الإجمالي</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="est-label-col">اسم السلاح 1</td>
+                    <td></td><td></td><td></td><td></td><td></td>
+                    <td class="est-total-col"></td>
+                </tr>
+                <tr class="est-total-row">
+                    <td class="est-label-col">الإجمالي</td>
+                    <td></td><td></td><td></td><td></td><td></td>
+                    <td class="est-total-col"></td>
+                </tr>
+                <tr>
+                    <td class="est-label-col">ما تم وصولة فعلياً</td>
+                    <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+                    <td class="est-total-col">0</td>
+                </tr>
+                <tr>
+                    <td class="est-label-col">ملاحق بالمنطقة</td>
+                    <td>ملاحق بالمنطقة</td><td>ملاحق بالمنطقة</td><td>ملاحق بالمنطقة</td><td>ملاحق بالمنطقة</td><td>ملاحق بالمنطقة</td>
+                    <td class="est-total-col">ملاحق بالمنطقة</td>
+                </tr>
+                <tr>
+                    <td class="est-label-col">إجمالي الملاحق</td>
+                    <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+                    <td class="est-total-col">0</td>
+                </tr>
+                <tr>
+                    <td class="est-label-col">القوة</td>
+                    <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+                    <td class="est-total-col">0</td>
+                </tr>
+                <tr>
+                    <td class="est-label-col">ما تم ترحيله</td>
+                    <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+                    <td class="est-total-col">0</td>
+                </tr>
+                <tr>
+                    <td class="est-label-col">المتبقي علي قوة الترحيل</td>
+                    <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+                    <td class="est-total-col">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('places', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique(); // المشروعات .. الشعبة
-            $table->unsignedBigInteger('attachment_place_id');
+            $table->unsignedBigInteger('attachment_place_id')->nullable();
             $table->timestamps();
 
             $table->foreign('attachment_place_id')

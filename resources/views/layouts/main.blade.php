@@ -22,9 +22,12 @@
         <main class="py-4 mb-5 main">
             <div class="container">
                 <div class="row flex">
-                    {{-- @include('alerts.success') --}}
                     @include('partials.sidebar')
-                    @yield('content')
+                    <div style="width: 80%">
+                        @include('alerts.success')
+                        @yield('content')
+                    </div>
+
                 </div>
             </div>
         </main>

@@ -12,7 +12,9 @@ class WeaponController extends Controller
      */
     public function index()
     {
-        //
+        $weapons = Weapon::latest()->paginate(10);
+
+        return view('weapons.index', compact('weapons'));
     }
 
     /**
@@ -20,7 +22,7 @@ class WeaponController extends Controller
      */
     public function create()
     {
-        //
+        return view('weapons.create');
     }
 
     /**
@@ -28,7 +30,15 @@ class WeaponController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:weapons,name',
+        ]);
+
+        Weapon::create($validated);
+
+        return redirect()
+            ->route('weapons.index')
+            ->with('success', 'تم إضافة السلاح بنجاح');
     }
 
     /**
@@ -36,7 +46,7 @@ class WeaponController extends Controller
      */
     public function show(Weapon $weapon)
     {
-        //
+        return view('weapons.show', compact('weapon'));
     }
 
     /**
@@ -44,7 +54,7 @@ class WeaponController extends Controller
      */
     public function edit(Weapon $weapon)
     {
-        //
+        return view('weapons.edit', compact('weapon'));
     }
 
     /**
@@ -52,7 +62,15 @@ class WeaponController extends Controller
      */
     public function update(Request $request, Weapon $weapon)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:weapons,name,' . $weapon->id,
+        ]);
+
+        $weapon->update($validated);
+
+        return redirect()
+            ->route('weapons.index')
+            ->with('success', 'تم تعديل السلاح بنجاح');
     }
 
     /**
@@ -60,6 +78,10 @@ class WeaponController extends Controller
      */
     public function destroy(Weapon $weapon)
     {
-        //
+        $weapon->delete();
+
+        return redirect()
+            ->route('weapons.index')
+            ->with('success', 'تم حذف السلاح بنجاح');
     }
 }

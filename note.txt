@@ -1,0 +1,50 @@
+==========================================================================
+====================================ganobia V.1.0=========================
+==========================================================================
+database disign				5		✔
+migrations				5		✔
+Models and Relations			5		✔
+basic controllers  			5		✔
+	- controllers file		✔
+	- views				✔
+	- test				✔
+	- user controller		in admin sys			
+
+success section				1		✔
+routers					3		✔
+middelware				7		✔
+middelware (view(can))			1
+admin system				3		
+exel import and export 			10		✔
+	✅ WithChunkReading		✔
+	✅ WithBatchInserts		✔
+	✅ WithUpserts			✔
+	✅ ShouldQueue			✔
+	✅ ShouldQueueWithoutChain
+	✅ LookupCache			✔
+	✅ Mapper Class			✔
+	✅ سجل للأخطاء			✔
+	✅ Progress Bar لمعرفة نسبة الإنجاز
+	✅ إمكانية استكمال الاستيراد إذا توقف السيرفر
+import real data			4		✔
+fixed data				3		✔
+cache soldiers and volunteers		5
+search and filters			7
+future add to (need select fields)	10
+select item to make action		3
+faxes					5
+ywmyat 3ddya				20
+handel error				1
+clean code				3
+backup data				3
+testing					5
+final frontend view 			20
+documentation				10
+
+=======================================================
+
+Add training-centers table and this table relate one to many
+- attr :
+	name
+
+previous units make it related between volunteers and units with many to many relation

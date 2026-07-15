@@ -1,0 +1,665 @@
+array:40 [▼ // app\Imports\VolunteersImport.php:61
+  "alrkm_alaaskr" => 10000
+  "aldrg" => "صانع ممتاز"
+  "alasm" => "محمد حسن الصافى الحماس"
+  "alohd" => " الورشة 314 مركبات"
+  "alktaaa_alloaaa" => "أسيوط"
+  "rkm_aldfaa" => "14 ص ع"
+  "tarykh_alttoaa" => 39692
+  "tarykh_srf_alratb_alaaal" => 38597
+  "tarykh_altrk_lldrg_alhaly" => 45292
+  "tarykh_aldm_aal_almntk_algnoby" => 45215
+  "tarykh_aldm_aal_alohd_alhaly" => 45215
+  "almohl_aldras" => "اعدادية"
+  "alslah" => "إدارة المركبات"
+  "alfy" => "مهنى"
+  "altkhss" => "كهربائي مركبات"
+  "mohl" => "P"
+  "ghyr_mohl" => null
+  "hgz" => 12
+  "hbs" => 1
+  "mhkm" => 0
+  "rkm_altlyfon" => "01016672707"
+  "rkm_altlyfon_akrb_alakarb" => null
+  "alrkm_alkom" => 29111201800130
+  "tarykh_almylad" => 33562
+  "alhal_alagtmaaay" => "متزوج"
+  "aadd_alabnaaa" => 0
+  "thkor" => 0
+  "anath" => 0
+  "alkry" => "قريه نديبه"
+  "almrkz" => "مركز دمنهور"
+  "almhafth" => "البحيرة"
+  "alozn" => 65
+  "altol" => 160
+  "frk_alozn" => "=IF([1]!Table1[[#This Row],[الوزن]]<>"",[1]!Table1[[#This Row],[الوزن]]-([1]!Table1[[#This Row],[الطول]]-100),"")"
+  "mkan_alalhak" => null
+  "alohdat_alsabkh" => "وحدة تدريب مشترك الهيئة الهندسية للقوات المسلحة - ورشة مركبات فرقة 19 مش - مركز تدريب مهن المركبات والمدرعات والتسليح وتشغيل المعادن"
+  "sfr" => null
+  "mokf_tb" => null
+  "mlahthat" => null
+  "mragaa" => "ادهم"
+]<?php
+
+namespace App\Imports;
+
+use Throwable;
+use App\Models\Volunteer;
+use App\Imports\Lookup\LookupCache;
+use App\Imports\Lookup\ExistingVolunteersCache;
+use App\Imports\Mappers\VolunteerExcelMapper;
+use App\Imports\Services\ImportStatistics;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithUpserts;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
+use Maatwebsite\Excel\Concerns\SkipsFailures;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+
+class VolunteersImport implements
+    ToModel,
+    WithHeadingRow,
+    WithChunkReading,
+    WithBatchInserts,
+    // WithUpserts,
+    SkipsOnFailure,
+    SkipsOnError,
+    SkipsEmptyRows
+    // ShouldQueue
+{
+    use SkipsFailures, SkipsErrors;
+
+    protected VolunteerExcelMapper $mapper;
+
+    protected ImportStatistics $statistics;
+
+    protected ExistingVolunteersCache $existing;
+
+    public function __construct()
+    {
+        $this->statistics = new ImportStatistics();
+
+        $lookup = new LookupCache();
+
+        $this->mapper = new VolunteerExcelMapper(
+            $lookup,
+            $this->statistics
+        );
+
+        $this->existing = new ExistingVolunteersCache();
+    }
+
+    /**
+     * معالجة صف من الإكسيل
+     */
+    public function model(array $row)
+    {
+        // dd($row);
+        // dd(array_keys($row));
+        try {
+
+            $data = $this->mapper->map(
+                $row,
+                $this->statistics->totalRows() + 1
+            );
+            // dd($data);
+            if (!$data) {
+                return null;
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Insert / Update Counters
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+                $this->existing->exists(
+                    $data['military_number']
+                )
+            ) {
+
+                $this->statistics->updated();
+
+            } else {
+
+                $this->statistics->inserted();
+
+                $this->existing->add(
+                    $data['military_number']
+                );
+            }
+
+            return new Volunteer($data);
+            // Volunteer::create($data);
+
+            // dd('saved');
+
+        } catch (Throwable $e) {
+
+            $this->statistics->database(
+                $this->statistics->totalRows(),
+                $e->getMessage()
+            );
+
+            return null;
+        }
+    }
+
+    /**
+     * مفتاح الـ Upsert
+     */
+    // public function uniqueBy()
+    // {
+    //     return 'military_number';
+    // }
+
+    /**
+     * حجم الـ Batch
+     */
+    public function batchSize(): int
+    {
+        return 1000;
+    }
+
+    /**
+     * حجم الـ Chunk
+     */
+    public function chunkSize(): int
+    {
+        return 1000;
+    }
+
+    /**
+     * التقرير النهائي
+     */
+    public function statistics(): ImportStatistics
+    {
+        $this->statistics->finish();
+
+        return $this->statistics;
+    }
+}
+  <?php
+
+namespace App\Imports\Mappers;
+
+use App\Imports\Lookup\LookupCache;
+use App\Imports\Services\ImportStatistics;
+use Illuminate\Support\Carbon;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+
+class VolunteerExcelMapper
+{
+    protected LookupCache $lookup;
+
+    protected ImportStatistics $stats;
+
+    public function __construct(
+        LookupCache $lookup,
+        ImportStatistics $stats
+    ) {
+        $this->lookup = $lookup;
+        $this->stats = $stats;
+    }
+
+    /**
+     * تحويل صف Excel إلى بيانات جاهزة للحفظ
+     */
+    public function map(array $row, int $rowNumber): ?array
+    {
+        $this->stats->rowRead();
+
+        if (blank($row['alrkm_alaaskr'] ?? null)) {
+
+            $this->stats->skipped();
+
+            return null;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Lookup
+        |--------------------------------------------------------------------------
+        */
+
+        $sectorId = $this->lookup->sector($row['alktaa'] ?? '');
+
+        $unitId = $this->lookup->unit($row['alohd'] ?? '');
+
+        $weaponId = $this->lookup->weapon($row['alslah'] ?? '');
+
+        $specializationId = $this->lookup->specialty($row['altkhss'] ?? '');
+
+        $governmentId = $this->lookup->governorate($row['almhafth'] ?? '');
+
+        $attachmentId = $this->lookup->place($row['mkan_allhak'] ?? '');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Lookup Validation
+        |--------------------------------------------------------------------------
+        */
+
+
+        $this->checkLookup(
+            $rowNumber,
+            'القطاع',
+            $row['alktaa'] ?? null,
+            $sectorId
+        );
+
+        $this->checkLookup(
+            $rowNumber,
+            'الوحدة',
+            $row['alohd'] ?? null,
+            $unitId
+        );
+
+        $this->checkLookup(
+            $rowNumber,
+            'السلاح',
+            $row['alslah'] ?? null,
+            $weaponId
+        );
+
+        $this->checkLookup(
+            $rowNumber,
+            'التخصص',
+            $row['altkhss'] ?? null,
+            $specializationId
+        );
+
+        $this->checkLookup(
+            $rowNumber,
+            'المحافظة',
+            $row['almhafth'] ?? null,
+            $governmentId
+        );
+
+        $this->checkLookup(
+            $rowNumber,
+            'مكان الإلحاق',
+            $row['mkan_allhak'] ?? null,
+            $attachmentId
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Final Data
+        |--------------------------------------------------------------------------
+        */
+
+        return [
+
+            'military_number' => trim($row['alrkm_alaaskr']),
+
+            'rank' => $this->string($row['aldrg'] ?? null),
+
+            'name' => $this->string($row['alasm'] ?? null),
+
+            'unit_id' => $unitId,
+
+            'sector_id' => $sectorId,
+
+            'batch_number' => $this->string($row['rkm_aldfaa'] ?? null),
+
+            'enlistment_date' => $this->excelDate($row['tarykh_alttoaa'] ?? null),
+
+            'high_salary_date' => $this->excelDate($row['tarykh_srf_alratb_alaaaly'] ?? null),
+
+            'current_rank_date' => $this->excelDate($row['tarykh_altrky_lldrgh_alhaly'] ?? null),
+
+            'southern_region_join_date' => $this->excelDate($row['tarykh_aldm_aal_almntk_algnoby'] ?? null),
+
+            'unit_join_date' => $this->excelDate($row['tarykh_aldm_aal_alohd_alhaly'] ?? null),
+
+            'educational_qualification' => $this->string($row['almohl_aldrasy'] ?? null),
+
+            'weapon_id' => $weaponId,
+
+            'category' => $this->string($row['alfyh'] ?? null),
+
+            'specialization_id' => $specializationId,
+
+            'qualified' => $this->qualified($row),
+
+            'not_qualified' => $this->notQualified($row),
+
+            'detention_count' => intval($row['hgz'] ?? 0),
+
+            'imprisonment_count' => intval($row['hbs'] ?? 0),
+
+            'court_cases_count' => intval($row['mhkm'] ?? 0),
+
+            'phone_number' => $this->string($row['rkm_altlyfon'] ?? null),
+
+            'relative_phone_number' => $this->string($row['rkm_tlyfon_akrb_alakarb'] ?? null),
+
+            'national_id' => $this->string($row['alrkm_alkomy'] ?? null),
+
+            'birth_date' => $this->excelDate($row['tarykh_almylad'] ?? null),
+
+            'marital_status' => $this->string($row['alhalh_alagtmaaay'] ?? null),
+
+            'children_count' => intval($row['aadd_alatfal'] ?? 0),
+
+            'male_children_count' => intval($row['thkor'] ?? 0),
+
+            'female_children_count' => intval($row['anath'] ?? 0),
+
+            'village' => $this->string($row['alkry'] ?? null),
+
+            'center' => $this->string($row['almrkz'] ?? null),
+
+            'governorate_id' => $governmentId,
+
+            'weight' => $row['alozn'] ?? null,
+
+            'height' => $row['altol'] ?? null,
+
+            'weight_difference' => $row['frk_alozn'] ?? null,
+
+            'attachment_id' => $attachmentId,
+
+            'previous_units' => $this->string($row['alohdat_alsabk'] ?? null),
+
+            'travel' => $this->string($row['sfr'] ?? null),
+
+            'medical_status' => $this->string($row['mokf_tby'] ?? null),
+
+            'notes' => $this->string($row['mlahthat'] ?? null),
+
+            'reviewer' => $this->string($row['mraagaa'] ?? null),
+
+        ];
+    }
+
+    protected function qualified(array $row): bool
+    {
+        return isset($row['mohl']) &&
+            trim($row['mohl']) === 'مؤهل';
+    }
+
+    protected function notQualified(array $row): bool
+    {
+        return isset($row['ghyr_mohl']) &&
+            trim($row['ghyr_mohl']) === 'غير مؤهل';
+    }
+
+    protected function checkLookup(
+        int $row,
+        string $field,
+        ?string $value,
+        ?int $id
+    ): void {
+
+        if (!blank($value) && !$id) {
+
+            $this->stats->lookup(
+                $row,
+                $field,
+                trim($value)
+            );
+
+        }
+    }
+
+    protected function string($value): ?string
+    {
+        if (blank($value)) {
+            return null;
+        }
+
+        return trim($value);
+    }
+
+    protected function excelDate($value): ?string
+    {
+        if (blank($value)) {
+            return null;
+        }
+
+        try {
+
+            if (is_numeric($value)) {
+
+                return Date::excelToDateTimeObject($value)
+                    ->format('Y-m-d');
+            }
+
+            return Carbon::parse($value)
+                ->format('Y-m-d');
+
+        } catch (\Throwable) {
+
+            return null;
+        }
+    }
+
+    public function statistics(): ImportStatistics
+    {
+        return $this->stats;
+    }
+} <?php
+
+namespace App\Imports\Lookup;
+
+use App\Models\Volunteer;
+
+class ExistingVolunteersCache
+{
+    /**
+     * military_number => id
+     */
+    protected array $volunteers = [];
+
+    public function __construct()
+    {
+        $this->load();
+    }
+
+    protected function load(): void
+    {
+        $this->volunteers = Volunteer::query()
+            ->select('id', 'military_number')
+            ->pluck('id', 'military_number')
+            ->toArray();
+    }
+
+    /**
+     * هل المتطوع موجود؟
+     */
+    public function exists(?string $militaryNumber): bool
+    {
+        if (blank($militaryNumber)) {
+            return false;
+        }
+
+        return isset(
+            $this->volunteers[
+                trim($militaryNumber)
+            ]
+        );
+    }
+
+    /**
+     * الحصول على ID
+     */
+    public function id(?string $militaryNumber): ?int
+    {
+        if (!$this->exists($militaryNumber)) {
+            return null;
+        }
+
+        return $this->volunteers[
+            trim($militaryNumber)
+        ];
+    }
+
+    /**
+     * إضافة متطوع أثناء الاستيراد
+     */
+    public function add(
+        string $militaryNumber,
+        ?int $id = null
+    ): void {
+
+        $this->volunteers[
+            trim($militaryNumber)
+        ] = $id;
+    }
+
+    /**
+     * عدد المتطوعين الموجودين
+     */
+    public function count(): int
+    {
+        return count($this->volunteers);
+    }
+
+    /**
+     * إعادة تحميل الكاش
+     */
+    public function refresh(): void
+    {
+        $this->load();
+    }
+}
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Volunteer extends Model
+{
+    use HasFactory;
+
+    protected $guarded = [];
+
+    protected $casts = [
+
+        'enlistment_date'      => 'date',
+        'high_salary_date'     => 'date',
+        'current_rank_date'    => 'date',
+        'unit_join_date'       => 'date',
+        'birth_date'           => 'date',
+
+        'southern_region'      => 'boolean',
+        'qualified'            => 'boolean',
+        'not_qualified'        => 'boolean',
+        'travel'               => 'string',
+        'reviewed'             => 'boolean',
+
+        'weight'              => 'decimal:2',
+        'height'              => 'decimal:2',
+        'weight_difference'   => 'decimal:2',
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    public function sector()
+    {
+        return $this->belongsTo(Sector::class);
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+
+    public function weapon()
+    {
+        return $this->belongsTo(Weapon::class);
+    }
+
+    public function specialization()
+    {
+        return $this->belongsTo(Specialtie::class, 'specialization_id');
+    }
+
+    public function governorate()
+    {
+        return $this->belongsTo(Government::class, 'governorate_id');
+    }
+
+    public function attachment_place()
+    {
+        return $this->belongsTo(Place::class, 'attachment_id');
+    }
+}
+ public function importPage()
+    {
+        // dd('Import Page');
+        return view('volunteers.import');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+
+            'file' => 'required|file|mimes:xlsx,xls,csv',
+
+        ]);
+        // dd($request->file('file')->getClientOriginalName());
+        $import = new VolunteersImport();
+
+        Excel::import(
+
+            $import,
+
+            $request->file('file')
+
+        );
+
+
+        return view(
+
+            'volunteers.import-report',
+
+            [
+
+                'statistics' => $import->statistics(),
+
+                'failures' => $import->failures(),
+
+                'errors' => $import->errors(),
+
+            ]
+
+        );
+    } المشكله ان العمليه بتتنفذ و بيظهرلى صفحه التقرير و الارقام صح بس مفيش اي حاجه بتضاف فى الداتا بيز و ده اللى بيظر في صفحه الريبورت إجمالي الصفوف
+10
+تمت الإضافة
+10
+تم التحديث
+0
+تم التخطي
+0
+أخطاء قاعدة البيانات
+0
+أخطاء التحقق
+0
+أخطاء Lookup
+6
+نسبة النجاح
+100 %
+أخطاء البيانات المرجعية (Lookup)
+#	الصف	الحقل	القيمة
+1	1	الوحدة	الورشة 314 مركبات
+2	1	السلاح	إدارة المركبات
+3	1	التخصص	كهربائي مركبات
+4	2	التخصص	ميكانيكى مركبات / راتب عالى / مجند
+5	3	التخصص	مفتش بطاريات
+6	4	التخصص	كاتب عسكرى / راتب عالى - مجند / عريف

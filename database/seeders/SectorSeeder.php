@@ -14,10 +14,11 @@ class SectorSeeder extends Seeder
     public function run(): void
     {
         $sectors = [
-            'Admin',
-            'Afrad',
-            'Moganaden',
-            'rateb_3aly',
+            'اللواء 117 مش ميكا مقل',
+            'اللواء 166 مش ميكا مقل',
+            'اللواء 305 مش ميكا مقل',
+            'حرس الحدود',
+            'قيادة المنطقة الجنوبية العسكرية',
         ];
 
         foreach ($sectors as $sector) {

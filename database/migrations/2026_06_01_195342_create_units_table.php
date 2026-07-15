@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('sector_id')->nullable();
             $table->string('name')->unique();
-            $table->integer('moratab');
-            $table->integer('seasa');
-            $table->integer('soldiers');
-            $table->integer('volunteers');
-            $table->integer('total');
-            $table->integer('nesbat_estkmal_seasa');
-            $table->integer('nesbat_estkmal_moratab');
+            $table->integer('moratab')->nullable();
+            $table->integer('seasa')->nullable();
+            $table->integer('soldiers')->nullable();
+            $table->integer('volunteers')->nullable();
+            $table->integer('total')->nullable();
+            $table->integer('nesbat_estkmal_seasa')->nullable();
+            $table->integer('nesbat_estkmal_moratab')->nullable();
             $table->timestamps();
 
             $table->foreign('sector_id')->references('id')->on('sectors')->onDelete('SET NULL');

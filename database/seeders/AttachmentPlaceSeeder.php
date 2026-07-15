@@ -16,6 +16,10 @@ class AttachmentPlaceSeeder extends Seeder
         $attachmentPlaces = [
             'داخلى',
             'خارجى',
+            'حفظ سلام داخل البلاد',
+            'حظف سلام خارج البلاد',
+            'سفر خارج البلاد',
+            'عرض + اجازة',
         ];
 
         foreach($attachmentPlaces as $attachmentPlace)

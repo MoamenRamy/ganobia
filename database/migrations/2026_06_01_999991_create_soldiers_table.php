@@ -72,6 +72,14 @@ return new class extends Migration
             $table->foreign('specialization_id')->references('id')->on('specialties')->onDelete('SET NULL');
             $table->foreign('attachment_id')->references('id')->on('places')->onDelete('SET NULL');
 
+
+            $table->index('sector_id');
+            $table->index('unit_id');
+            $table->index('weapon_id');
+            $table->index('specialization_id');
+            $table->index('governorate_id');
+            $table->index('attachment_id');
+
         });
     }
 

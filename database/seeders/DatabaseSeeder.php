@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
             GovernmentSeeder::class,
             AttachmentPlaceSeeder::class,
             PlaceSeeder::class,
-            VolunteerSeeder::class,
-            SoldierSeeder::class,
+            // VolunteerSeeder::class,
+            // SoldierSeeder::class,
         ]);
     }
 }

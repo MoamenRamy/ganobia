@@ -1,0 +1,19 @@
+===================================================================
+=============================✔Afrad System✔======================
+===================================================================
+
+
+finish view middleware
+
+finish admin sys
+
+cache soldiers and volunteers
+
+search and filters
+
+future add to (need select fields)
+
+select item to make action
+
+
+===================================================================

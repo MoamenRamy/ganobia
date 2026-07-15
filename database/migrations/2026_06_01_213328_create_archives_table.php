@@ -60,6 +60,8 @@ return new class extends Migration
             $table->boolean('attendance')->default(true);     // التمام
 
             // attachment place
+            $table->string('attachment')->nullable();       // مكان الالحاق
+
 
             $table->timestamps();
 

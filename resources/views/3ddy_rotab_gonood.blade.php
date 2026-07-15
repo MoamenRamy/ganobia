@@ -1,70 +1,70 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>يومية عددية بالفئات</title>
-        <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-</head>
-<body>
-
-<div class="row text-center">
-    <h3 class="parent_name">  </h3>
-    <div class="actions">
-        <div id="add_to" class="btn-group print-hidden">
-            <a class="btn btn-circle btn-info act_but" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
-                <i class="icon-flag"></i> مجمعة  <i class="fa fa-angle-down"></i>
-            </a>
-            <ul class="dropdown-menu pull-right">
-                <li>
-                    <a href="3ddy_rotab_gonood.php">
-                    <i class="fa fa-check"></i> مجمعة</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="3ddy_rotab_gonood.php?id=1">
-                    <i class="fa fa-check"></i> قيادة الفرقة 16 مش ميكا</a>
-                </li>
-                <li>
-                    <a href="3ddy_rotab_gonood.php?id=2">
-                    <i class="fa fa-check"></i> ل 16 مش ميكا</a>
-                </li>
-                <li>
-                    <a href="3ddy_rotab_gonood.php?id=3">
-                    <i class="fa fa-check"></i> ل3 مش ميكا</a>
-                </li>
-                <li>
-                    <a href="3ddy_rotab_gonood.php?id=4">
-                    <i class="fa fa-check"></i> ل 57 مدرع</a>
-                </li>
-                <li>
-                    <a href="3ddy_rotab_gonood.php?id=5">
-                    <i class="fa fa-check"></i> ل 41 مد وسط</a>
-                </li>
-            </ul>
+@extends('layouts.main')
+@section('content')
+<div class="ygn-page-container">
+    <div class="ygn-page-header">
+        <h3 class="ygn-parent-name">يومية عددية بالفئات</h3>
+        <div class="ygn-actions">
+            <div class="ygn-btn-group">
+                <a class="ygn-btn ygn-btn-circle ygn-btn-info ygn-act-but" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+                    <i class="ygn-icon-flag"></i> مجمعة <i class="ygn-fa-angle-down"></i>
+                </a>
+                <ul class="ygn-dropdown-menu">
+                    <li>
+                        <a href="3ddy_rotab_gonood.php">
+                            <i class="ygn-fa-check"></i> مجمعة
+                        </a>
+                    </li>
+                    <li class="ygn-divider"></li>
+                    <li>
+                        <a href="3ddy_rotab_gonood.php?id=1">
+                            <i class="ygn-fa-check"></i> قيادة الفرقة 16 مش ميكا
+                        </a>
+                    </li>
+                    <li>
+                        <a href="3ddy_rotab_gonood.php?id=2">
+                            <i class="ygn-fa-check"></i> ل 16 مش ميكا
+                        </a>
+                    </li>
+                    <li>
+                        <a href="3ddy_rotab_gonood.php?id=3">
+                            <i class="ygn-fa-check"></i> ل3 مش ميكا
+                        </a>
+                    </li>
+                    <li>
+                        <a href="3ddy_rotab_gonood.php?id=4">
+                            <i class="ygn-fa-check"></i> ل 57 مدرع
+                        </a>
+                    </li>
+                    <li>
+                        <a href="3ddy_rotab_gonood.php?id=5">
+                            <i class="ygn-fa-check"></i> ل 41 مد وسط
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
+
+    <br/>
+
+    <div class="ygn-table-wrapper">
+        <table class="ygn-table ygn-table-bordered">
+            <thead>
+                <tr>
+                    <th>الوحدة / الفئة</th>
+                    <th>حرفي</th>
+                    <th>سائق جنزير</th>
+                    <th>سائق عجل</th>
+                    <th>صف</th>
+                    <th>كاتب عسكرى</th>
+                    <th>مهني</th>
+                    <th>غير مستكمل البيانات</th>
+                    <th>الإجمالي</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </div>
-<br/>
-
-<table class='table table-bordered'>
-    <thead>
-        <tr>
-            <th>الوحدة / الفئة</th>
-            <th>حرفي</th>
-            <th>سائق جنزير</th>
-            <th>سائق عجل</th>
-            <th>صف</th>
-            <th>كاتب عسكرى </th>
-            <th>مهني</th>
-            <th>غير مستكمل البيانات</th>
-            <th>الإجمالي</th>
-        </tr>
-    </thead>
-    <tbody>
-
-    </tbody>
-</table>
-
-</body>
-</html>
+@endsection

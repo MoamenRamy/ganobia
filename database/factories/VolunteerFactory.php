@@ -24,90 +24,118 @@ class VolunteerFactory extends Factory
      */
     public function definition(): array
     {
-        $birthDate = fake()->dateTimeBetween('-45 years', '-18 years');
-        $enlistmentDate = fake()->dateTimeBetween('-5 years', 'now');
-        $dischargeDate = fake()->boolean(30)
-            ? fake()->dateTimeBetween('now', '+3 years')
-            : null;
+        $maleChildren = fake()->numberBetween(0, 5);
+        $femaleChildren = fake()->numberBetween(0, 5);
 
         return [
-            'military_number' => fake()->unique()->numerify('######'),
 
+            // البيانات الأساسية
+            'military_number' => fake()->unique()->numerify('##########'),
             'rank' => fake()->randomElement([
                 'جندي',
                 'عريف',
                 'رقيب',
-                'رقيب أول',
-                'مساعد',
+                'رقيب أول'
             ]),
-
             'name' => fake('ar_EG')->name(),
 
-            'sector_id' => Sector::inRandomOrder()->value('id'),
-            'unit_id' => Unit::inRandomOrder()->value('id'),
-            'weapon_id' => Weapon::inRandomOrder()->value('id'),
-            'specialization_id' => Specialtie::inRandomOrder()->value('id'),
-            'governorate_id' => Government::inRandomOrder()->value('id'),
+            // الوحدة والقطاع
+            'unit_id' => Unit::query()->inRandomOrder()->value('id'),
+            'sector_id' => Sector::query()->inRandomOrder()->value('id'),
+
+            // الدفعة والتواريخ
+            'batch_number' => fake()->numerify('دفعة ###'),
+
+            'enlistment_date' => fake()->date(),
+            'high_salary_date' => fake()->date(),
+            'current_rank_date' => fake()->date(),
+            'southern_region_join_date' => fake()->date(),
+            'unit_join_date' => fake()->date(),
+
+            // المؤهلات
+            'educational_qualification' => fake()->randomElement([
+                'ابتدائي',
+                'إعدادي',
+                'ثانوي',
+                'دبلوم',
+                'بكالوريوس',
+                'ليسانس'
+            ]),
+
+            'weapon_id' => Weapon::query()->inRandomOrder()->value('id'),
 
             'category' => fake()->randomElement([
-                'مقاتل',
-                'خدمات',
-                'فني',
-                'إداري',
+                'صف',
+                'سائق',
+                'فني'
             ]),
 
-            'enlistment_date' => $enlistmentDate,
-            'discharge_date' => $dischargeDate,
-            'birth_date' => $birthDate,
+            'specialization_id' => Specialtie::query()->inRandomOrder()->value('id'),
 
+            'qualified' => fake()->boolean(),
+            'not_qualified' => fake()->boolean(),
+
+            // الجزاءات
+            'detention_count' => fake()->numberBetween(0, 10),
+            'imprisonment_count' => fake()->numberBetween(0, 5),
+            'court_cases_count' => fake()->numberBetween(0, 3),
+
+            // التليفونات
+            'phone_number' => fake()->numerify('010########'),
+            'relative_phone_number' => fake()->numerify('011########'),
+
+            // البيانات الشخصية
             'national_id' => fake()->numerify('##############'),
-
-            'driving_license_grade' => fake()->randomElement([
-                'أولى',
-                'ثانية',
-                'ثالثة',
-                null,
-            ]),
-
-            'qualification' => fake()->randomElement([
-                'مؤهل متوسط',
-                'فوق متوسط',
-                'عالي',
-            ]),
-
-            'job_before_service' => fake()->jobTitle(),
+            'birth_date' => fake()->date(),
 
             'marital_status' => fake()->randomElement([
                 'أعزب',
                 'متزوج',
+                'مطلق',
+                'أرمل'
             ]),
 
-            'male_children_count' => fake()->numberBetween(0, 4),
-            'female_children_count' => fake()->numberBetween(0, 4),
+            'children_count' => $maleChildren + $femaleChildren,
+            'male_children_count' => $maleChildren,
+            'female_children_count' => $femaleChildren,
 
-            'mother_name' => fake('ar_EG')->name('female'),
-            'mother_job' => fake()->jobTitle(),
+            // العنوان
+            'village' => fake('ar_EG')->city(),
+            'center' => fake('ar_EG')->city(),
 
-            'father_job' => fake()->jobTitle(),
+            'governorate_id' => Government::query()
+                ->inRandomOrder()
+                ->value('id'),
 
-            'phone_number' => fake()->numerify('01#########'),
+            // القياسات
+            'weight' => fake()->randomFloat(2, 55, 110),
+            'height' => fake()->randomFloat(2, 155, 195),
+            'weight_difference' => fake()->randomFloat(2, -20, 20),
 
-            'nearest_relative' => fake('ar_EG')->name(),
+            // بيانات الخدمة
+            'attachment_id' => Place::query()->inRandomOrder()->value('id'),
 
-            'nearest_relative_phone' => fake()->numerify('01#########'),
+            'previous_units' => fake()->sentence(),
 
-            'address' => fake('ar_EG')->address(),
+            'travel' => fake()->randomElement([
+                'لا يوجد',
+                'مأمورية',
+                'إجازة',
+                'خارج البلاد'
+            ]),
 
-            'height' => fake()->randomFloat(2, 150, 200),
-            'weight' => fake()->randomFloat(2, 50, 120),
+            // طبي
+            'medical_status' => fake()->randomElement([
+                'لائق',
+                'محدود لائق',
+                'تحت العلاج'
+            ]),
 
-            'supply_date' => fake()->date(),
+            // ملاحظات
+            'notes' => fake()->paragraph(),
 
-            'notes' => fake()->optional()->sentence(),
-
-            'attendance' => fake()->boolean(90),
-
-            'attachment_id' => Place::inRandomOrder()->value('id'),
+            // المراجع
+            'reviewer' => fake('ar_EG')->name(),
         ];
     }
 }

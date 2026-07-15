@@ -14,55 +14,75 @@ return new class extends Migration
         Schema::create('volunteers', function (Blueprint $table) {
             $table->id();
 
-            $table->string('military_number')->unique();      // الرقم العسكري
-            $table->string('rank')->nullable();               // الدرجة
-            $table->string('name');                           // الاسم
+            // البيانات الأساسية
+            $table->string('military_number')->unique();        // الرقم العسكرى
+            $table->string('rank')->nullable();                 // الدرجة
+            $table->string('name');                             // الاسم
 
-            $table->unsignedBigInteger('sector_id')->nullable();             // القطاع
-            $table->unsignedBigInteger('unit_id')->nullable();               // الوحدة
-            $table->unsignedBigInteger('weapon_id')->nullable();             // السلاح
-            $table->string('category')->nullable();           // الفئة
-            $table->unsignedBigInteger('specialization_id')->nullable();     // التخصص
+            // الوحدة والقطاع
+            $table->unsignedBigInteger('unit_id')->nullable();      //الوحدة
+            $table->unsignedBigInteger('sector_id')->nullable();    // القطاع
 
-            $table->date('enlistment_date')->nullable();      // تاريخ التجنيد
-            $table->date('discharge_date')->nullable();       // تاريخ التسريح
-            $table->date('birth_date')->nullable();           // تاريخ الميلاد
+            // الدفعة والتواريخ
+            $table->string('batch_number')->nullable();             // رقم الدفعهة
 
-            $table->string('national_id', 14)->nullable();    // الرقم القومي
+            $table->date('enlistment_date')->nullable(); // تاريخ التطوع
+            $table->date('high_salary_date')->nullable(); // تاريخ صرف الراتب العالي
+            $table->date('current_rank_date')->nullable(); // تاريخ الترقى للدرجة الحالية
+            $table->date('southern_region_join_date')->nullable(); // تاريخ الضم على المنطقة الجنوبية
+            $table->date('unit_join_date')->nullable(); // تاريخ الضم على الوحدة الحالية
 
-            $table->string('driving_license_grade')->nullable(); // درجة الرخصة
-            $table->string('qualification')->nullable();         // المؤهل
-            $table->string('job_before_service')->nullable();    // المهنة قبل التجنيد
 
-            $table->string('marital_status')->nullable();     // الحالة الاجتماعية
+            // المؤهلات
+            $table->string('educational_qualification')->nullable();    // المؤهل الدراسى
+            $table->unsignedBigInteger('weapon_id')->nullable();        // السلاح
+            $table->string('category')->nullable();                     // الفئة
+            $table->unsignedBigInteger('specialization_id')->nullable();// التخصص
 
-            $table->unsignedTinyInteger('male_children_count')->default(0);
-            $table->unsignedTinyInteger('female_children_count')->default(0);
+            $table->boolean('qualified')->default(false);               // مؤهل
+            $table->boolean('not_qualified')->default(false);           // غير مؤهل
 
-            $table->string('mother_name')->nullable();        // اسم الأم
-            $table->string('mother_job')->nullable();         // مهنة الأم
-            $table->string('father_job')->nullable();         // مهنة الوالد
+            // الجزاءات
+            $table->unsignedInteger('detention_count')->default(0); // حجز
+            $table->unsignedInteger('imprisonment_count')->default(0); // حبس
+            $table->unsignedInteger('court_cases_count')->default(0); // محكمة
 
-            $table->string('phone_number')->nullable();       // رقم التلفون
+            // التليفونات
+            $table->string('phone_number')->nullable();             // رقم التلفون
+            $table->string('relative_phone_number')->nullable();    // رقم تلفون اقرب الاقارب
 
-            $table->string('nearest_relative')->nullable();   // أقرب الأقارب
-            $table->string('nearest_relative_phone')->nullable(); // رقم أقرب الأقارب
+            // البيانات الشخصية
+            $table->string('national_id', 14)->nullable();          // الرقم القومى
+            $table->date('birth_date')->nullable();                 // تاريخ الميلاد
 
-            $table->unsignedBigInteger('governorate_id')->nullable();        // المحافظة
-            $table->text('address')->nullable();              // العنوان
+            $table->string('marital_status')->nullable();           // الحاله الاجتماعية
 
-            $table->decimal('height', 5, 2)->nullable();      // الطول
-            $table->decimal('weight', 5, 2)->nullable();      // الوزن
+            $table->unsignedTinyInteger('children_count')->default(0);          // عدد الاطفال
+            $table->unsignedTinyInteger('male_children_count')->default(0);     // الذكور
+            $table->unsignedTinyInteger('female_children_count')->default(0);   // الاناث
 
-            $table->date('supply_date')->nullable();          // تاريخ الإمداد
+            // العنوان
+            $table->string('village')->nullable();                          // القرية
+            $table->string('center')->nullable();                           // المركز
+            $table->unsignedBigInteger('governorate_id')->nullable();       // المحافظة
 
-            $table->text('notes')->nullable();                // ملاحظات
+            // القياسات
+            $table->decimal('weight', 5, 2)->nullable();                    // الوزن
+            $table->decimal('height', 5, 2)->nullable();                    // الطول
+            $table->decimal('weight_difference', 5, 2)->nullable();         // فرق الوزن
 
-            $table->boolean('attendance')->default(true);     // التمام
+            // بيانات الخدمة
+            $table->unsignedBigInteger('attachment_id')->nullable();        // مكان الالحاق
+            $table->text('previous_units')->nullable();                     // الوحدات السابقة
 
-            $table->unsignedBigInteger('attachment_id')->nullable();       // مكان الالحاق
+            $table->string('travel')->nullable();                      // سفر
 
-            // attachment place
+            // طبي
+            $table->string('medical_status')->nullable();               // موقف طبى
+
+            // ملاحظات ومراجعة
+            $table->text('notes')->nullable();                          // ملاحظات
+            $table->string('reviewer')->nullable();                     // المراجع
 
             $table->timestamps();
 
@@ -72,8 +92,6 @@ return new class extends Migration
             $table->foreign('governorate_id')->references('id')->on('governments')->onDelete('SET NULL');
             $table->foreign('specialization_id')->references('id')->on('specialties')->onDelete('SET NULL');
             $table->foreign('attachment_id')->references('id')->on('places')->onDelete('SET NULL');
-
-
         });
     }
 

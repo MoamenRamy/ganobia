@@ -12,7 +12,11 @@ class GovernmentController extends Controller
      */
     public function index()
     {
-        //
+        // $governments = Government::orderBy('id', 'desc')->get();
+        // $governments = Government::orderBy('id', 'asc')->get();
+        $governments = Government::all();
+
+        return view('governments.index', compact('governments'));
     }
 
     /**
@@ -20,7 +24,7 @@ class GovernmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('governments.create');
     }
 
     /**
@@ -28,7 +32,15 @@ class GovernmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:governments,name',
+        ]);
+
+        Government::create($validated);
+
+        return redirect()
+            ->route('governments.index')
+            ->with('success', 'تم إضافة المحافظة بنجاح');
     }
 
     /**
@@ -36,7 +48,7 @@ class GovernmentController extends Controller
      */
     public function show(Government $government)
     {
-        //
+        return view('governments.show', compact('government'));
     }
 
     /**
@@ -44,7 +56,7 @@ class GovernmentController extends Controller
      */
     public function edit(Government $government)
     {
-        //
+        return view('governments.edit', compact('government'));
     }
 
     /**
@@ -52,7 +64,15 @@ class GovernmentController extends Controller
      */
     public function update(Request $request, Government $government)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:governments,name,' . $government->id,
+        ]);
+
+        $government->update($validated);
+
+        return redirect()
+            ->route('governments.index')
+            ->with('success', 'تم تعديل المحافظة بنجاح');
     }
 
     /**
@@ -60,6 +80,10 @@ class GovernmentController extends Controller
      */
     public function destroy(Government $government)
     {
-        //
+        $government->delete();
+
+        return redirect()
+            ->route('governments.index')
+            ->with('success', 'تم حذف المحافظة بنجاح');
     }
 }

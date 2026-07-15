@@ -12,7 +12,9 @@ class AttachmentPlaceController extends Controller
      */
     public function index()
     {
-        //
+        $attachmentPlaces = AttachmentPlace::latest()->paginate(10);
+
+        return view('attachment_places.index', compact('attachmentPlaces'));
     }
 
     /**
@@ -20,7 +22,7 @@ class AttachmentPlaceController extends Controller
      */
     public function create()
     {
-        //
+        return view('attachment_places.create');
     }
 
     /**
@@ -28,7 +30,15 @@ class AttachmentPlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:attachment_places,name',
+        ]);
+
+        AttachmentPlace::create($validated);
+
+        return redirect()
+            ->route('attachment-places.index')
+            ->with('success', 'تم إضافة جهة الإلحاق بنجاح');
     }
 
     /**
@@ -36,7 +46,8 @@ class AttachmentPlaceController extends Controller
      */
     public function show(AttachmentPlace $attachmentPlace)
     {
-        //
+        $attachmentPlace->load('places');
+        return view('attachment_places.show', compact('attachmentPlace'));
     }
 
     /**
@@ -44,7 +55,7 @@ class AttachmentPlaceController extends Controller
      */
     public function edit(AttachmentPlace $attachmentPlace)
     {
-        //
+        return view('attachment_places.edit', compact('attachmentPlace'));
     }
 
     /**
@@ -52,7 +63,15 @@ class AttachmentPlaceController extends Controller
      */
     public function update(Request $request, AttachmentPlace $attachmentPlace)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:attachment_places,name,' . $attachmentPlace->id,
+        ]);
+
+        $attachmentPlace->update($validated);
+
+        return redirect()
+            ->route('attachment-places.index')
+            ->with('success', 'تم تعديل جهة الإلحاق بنجاح');
     }
 
     /**
@@ -60,6 +79,10 @@ class AttachmentPlaceController extends Controller
      */
     public function destroy(AttachmentPlace $attachmentPlace)
     {
-        //
+        $attachmentPlace->delete();
+
+        return redirect()
+            ->route('attachment-places.index')
+            ->with('success', 'تم حذف جهة الإلحاق بنجاح');
     }
 }

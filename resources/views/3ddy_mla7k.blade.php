@@ -1,119 +1,102 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>يومية عددية خاصة الملاحق</title>
-</head>
-<body>
+@extends('layouts.main')
+@section('content')
+<div class="mlk-page-container">
+    <div class="mlk-page-header">
+        <h2> يومية عددية خاصة الملاحق</h2>
+        <div class="mlk-title">يومية عددية خاصة الملاحق الداخلية</div>
+    </div>
 
-<div class="col-md-12">
-    <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="fa fa-edit"></i>يومية عددية خاصة الملاحق الداخلية
-            </div>
-            <div class="actions">
-                <div id="add_to" class="btn-group">
-                    <a class="btn btn-circle btn-info" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
-                    <i class="icon-flag"></i> الإجمالي <i class="fa fa-angle-down"></i>
+    <div class="mlk-actions">
+        <div class="mlk-btn-group">
+            <a class="mlk-btn mlk-btn-circle mlk-btn-info" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+                <i class="mlk-icon-flag"></i> الإجمالي <i class="mlk-fa-angle-down"></i>
+            </a>
+            <ul class="mlk-dropdown-menu">
+                <li>
+                    <a href="3ddy_mla7k.php?place_id=1&type=1">
+                        <i class="mlk-fa-check"></i> الإجمالي
                     </a>
-                    <ul class="dropdown-menu pull-right">
-                        <li>
-                            <a href="3ddy_mla7k.php?place_id=1&type=1">
-                            <i class="icon-book-open"></i> الإجمالي </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="3ddy_mla7k.php?place_id=1&unit_id=1&type=1">
-                            <i class="fa fa-check"></i> الوحدة 1</a>
-                        </li>
-                        <li>
-                            <a href="3ddy_mla7k.php?place_id=1&unit_id=2&type=1">
-                            <i class="fa fa-check"></i> الوحدة 2</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                </li>
+                <li>
+                    <a href="3ddy_mla7k.php?place_id=1&unit_id=1&type=1">
+                        <i class="mlk-fa-check"></i> الوحدة 1
+                    </a>
+                </li>
+                <li>
+                    <a href="3ddy_mla7k.php?place_id=1&unit_id=2&type=1">
+                        <i class="mlk-fa-check"></i> الوحدة 2
+                    </a>
+                </li>
+            </ul>
         </div>
+    </div>
 
-        <!-- جدول الجنود -->
-        <div class="portlet-body">
-            <font size=4> الجنود </font>
-            <br/>
-            <table class="table table-striped table-hover table-bordered printable-data">
+    <!-- جدول الجنود -->
+    <div class="mlk-section">
+        <div class="mlk-section-title">الجنود</div>
+        <div class="mlk-table-wrapper">
+            <table class="mlk-table">
                 <thead>
-                    <tr class='info'>
-                        <th style="width:200px">
-                             المكان / الوحدة
-                        </th>
-                        <th class='title-rotated'><div style="right:0">الوحدة 1</div></th>
-                        <th class='title-rotated'><div style="right:0">الوحدة 2</div></th>
-                        <th>الإجمالي</th>
+                    <tr>
+                        <th class="mlk-unit-col">المكان / الوحدة</th>
+                        <th>الوحدة 1</th>
+                        <th>الوحدة 2</th>
+                        <th class="mlk-total-col">الإجمالي</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class='info'>المكان 1</td>
-                        <td></td>
-                        <td></td>
-                        <td class='info'></td>
+                        <td class="mlk-unit-col">المكان 1</td>
+                        <td></td><td></td>
+                        <td class="mlk-total-col"></td>
                     </tr>
                     <tr>
-                        <td class='info'>المكان 2</td>
-                        <td></td>
-                        <td></td>
-                        <td class='info'></td>
+                        <td class="mlk-unit-col">المكان 2</td>
+                        <td></td><td></td>
+                        <td class="mlk-total-col"></td>
                     </tr>
-                    <tr class='info'>
-                        <td>الإجمالي العام</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr class="mlk-total-row">
+                        <td class="mlk-unit-col">الإجمالي العام</td>
+                        <td></td><td></td>
+                        <td class="mlk-total-col"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
+    </div>
 
-        <!-- جدول الراتب العالي -->
-        <div class="portlet-body">
-            <font size=4> الراتب العالي </font>
-            <br/>
-            <table class="table table-striped table-hover table-bordered printable-data">
+    <!-- جدول الراتب العالي -->
+    <div class="mlk-section">
+        <div class="mlk-section-title">الراتب العالي</div>
+        <div class="mlk-table-wrapper">
+            <table class="mlk-table">
                 <thead>
-                    <tr class='info'>
-                        <th style="width:200px">
-                             المكان / الوحدة
-                        </th>
-                        <th class='title-rotated'><div style="right:0">الوحدة 1</div></th>
-                        <th class='title-rotated'><div style="right:0">الوحدة 2</div></th>
-                        <th>الإجمالي</th>
+                    <tr>
+                        <th class="mlk-unit-col">المكان / الوحدة</th>
+                        <th>الوحدة 1</th>
+                        <th>الوحدة 2</th>
+                        <th class="mlk-total-col">الإجمالي</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class='info'>المكان 1</td>
-                        <td></td>
-                        <td></td>
-                        <td class='info'></td>
+                        <td class="mlk-unit-col">المكان 1</td>
+                        <td></td><td></td>
+                        <td class="mlk-total-col"></td>
                     </tr>
                     <tr>
-                        <td class='info'>المكان 2</td>
-                        <td></td>
-                        <td></td>
-                        <td class='info'></td>
+                        <td class="mlk-unit-col">المكان 2</td>
+                        <td></td><td></td>
+                        <td class="mlk-total-col"></td>
                     </tr>
-                    <tr class='info'>
-                        <td>الإجمالي العام</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr class="mlk-total-row">
+                        <td class="mlk-unit-col">الإجمالي العام</td>
+                        <td></td><td></td>
+                        <td class="mlk-total-col"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-
-</body>
-</html>
+@endsection

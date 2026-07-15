@@ -45,4 +45,9 @@ class Archive extends Model
     {
         return $this->belongsTo(Government::class, 'governorate_id');
     }
+    
+    public function attachment_place()
+    {
+        return $this->belongsTo(Place::class, 'attachment_id');
+    }
 }

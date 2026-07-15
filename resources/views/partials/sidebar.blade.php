@@ -33,7 +33,7 @@
 
                     <ul class="sub">
                         <li><a href="#">اضافة عضو جديد</a></li>
-                        <li> <a href="{{ route('units') }}">الوحدات</a> </li>
+                        <li> <a href="{{ route('sectors.index') }}">الوحدات</a> </li>
 
                         <li class="has-sub">
                             <div class="menu-title sub-title">
@@ -59,8 +59,8 @@
                     </div>
 
                     <ul class="sub">
-                        <li> <a href="{{ route('weapons') }}"> الأسلحة </a> </li>
-                        <li><a href=" {{ route('specialtie') }} ">التخصصات</a></li>
+                        <li> <a href="{{ route('weapons.index') }}"> الأسلحة </a> </li>
+                        <li><a href=" {{ route('specialties.index') }} ">التخصصات</a></li>
                         <li><a href="{{ route('Trainingcenters') }}">مراكز التدريب</a></li>
 
                     </ul>
@@ -73,35 +73,31 @@
                     </div>
 
                     <ul class="sub">
-                        <li> <a href="{{ route('government') }}"> اضافة محافظة </a> </li>
-                        <li><a href=" {{ route('Alldata') }}  ">عرض الكل</a></li>
+                        <li> <a href="{{ route('governments.create') }}"> اضافة محافظة </a> </li>
+                        <li><a href=" {{ route('governments.index') }}  ">عرض الكل</a></li>
 
                     </ul>
-
-
 
                 </li>
 
 
                 <li class="has-sub">
                     <div class="menu-title sub-title">
-                        <span class="icon"> <a href="{{ route('place') }}"></a> </span>الاماكن
+                        <span class="icon"> <a href="{{ route('attachment-places.index') }}"></a> </span>الاماكن
                         <span class="arrow">⌄</span>
 
                     </div>
 
 
-                      <ul class="sub">
-                        <li> <a href="{{ route('place') }}"> الأماكن </a> </li>
+                    <ul class="sub">
+                        <li> <a href="{{ route('attachment-places.index') }}"> الأماكن </a> </li>
 
 
                     </ul>
                 </li>
 
 
-
-
-                <li class="has-sub">
+                {{-- <li class="has-sub">
                     <div class="menu-title sub-title">
                         <span class="icon"></span>الوظائف
                         <span class="arrow">⌄</span>
@@ -112,152 +108,85 @@
                         <li><a href=" {{ route('Viewall') }} ">عرض الكل</a></li>
 
                     </ul>
-                </li>
+                </li> --}}
             </ul>
-        </ul>
+    </ul>
     </li>
 
     <!--قائد الفرقة -->
 
-    <li class="has-sub">
+    {{-- <li class="has-sub">
 
         <div class="menu-title sub-title">
-            <span class="icon">🖥️ قائد الفرقة</span>
+            <span class="icon">🖥️ رئيس الفرع </span>
         </div>
 
-    </li>
+    </li> --}}
 
     <!-- جهاز الأفراد -->
 
-    <li class="has-sub">
-
-        <div class="menu-title sub-title">
-            <span class="icon">🖥️جهاز الأفراد</span>
-        </div>
-
-    </li>
-
-    <!-- جهاز الارشيف -->
-
-    <li class="has-sub">
-
-        <div class="menu-title sub-title">
-            <span class="icon">🖥️جهاز الارشيف</span>
-        </div>
-
-    </li>
-
-    <!-- جهاز البيانات -->
-
-    <li class="has-sub">
+    {{-- <li class="has-sub">
 
         <div class="menu-title sub-title">
             <span class="icon">🖥️جهاز البيانات</span>
         </div>
 
-    </li>
+    </li> --}}
+
+    <!-- جهاز الارشيف -->
+
+    {{-- <li class="has-sub">
+
+        <div class="menu-title sub-title">
+            <span class="icon">🖥️جهاز الراتب العالى</span>
+        </div>
+
+    </li> --}}
+
+    <!-- جهاز البيانات -->
+
+    {{-- <li class="has-sub">
+
+        <div class="menu-title sub-title">
+            <span class="icon">🖥️جهاز الملفات</span>
+        </div>
+
+    </li> --}}
 
     <!-- جهاز القطاع -->
 
-    <li class="has-sub">
+    {{-- <li class="has-sub">
 
         <div class="menu-title sub-title">
-            <span class="icon">🖥️جهاز القطاع</span>
+            <span class="icon">🖥️جهاز السجلات</span>
         </div>
 
-    </li>
+    </li> --}}
 
     <!-- جهاز شئون ضباط -->
 
-    <li class="has-sub">
+    {{-- <li class="has-sub">
 
         <div class="menu-title sub-title">
             <span class="icon">🖥️جهاز شئون ضباط</span>
         </div>
 
-    </li>
+    </li>--}}
 
-    <!-- جهاز الادارة العسكرية -->
-
-    <li class="has-sub">
-
-        <div class="menu-title sub-title">
-            <span class="icon">🖥️جهاز الادارة العسكرية</span>
-        </div>
-
-    </li>
-
-    <!-- جهاز الافراد  -->
-
-    <li class="has-sub">
-
-        <div class="menu-title sub-title">
-            <span class="icon">🖥️ جهاز الافراد 2</span>
-        </div>
-
-    </li>
-
-    <!-- منظومة 2  -->
-
-    <li class="has-sub">
-
-        <div class="menu-title sub-title">
-            <span class="icon"> 🖥️منظومة 2 </span>
-        </div>
-
-    </li>
-
-    <!-- منظومة 3  -->
-
-    <li class="has-sub">
-
-        <div class="menu-title sub-title">
-            <span class="icon"> 🖥️ منظومة 3 </span>
-        </div>
-
-    </li>
-
-    <!-- منظومة 4  -->
-
-    <li class="has-sub">
-
-        <div class="menu-title sub-title">
-            <span class="icon">🖥️ منظومة 4 </span>
-        </div>
-
-    </li>
-
-
-    <!-- منظومة 5  -->
-
-    <li class="has-sub">
-
-        <div class="menu-title sub-title">
-            <span class="icon"> 🖥️ منظومة 5 </span>
-        </div>
-
-    </li>
-
-    <!--  الكتيبة الطبية  -->
-    <li class="has-sub">
-        <div class="menu-title sub-title">
-            <span class="icon"> 🖥️ الكتيبة الطبية </span>
-        </div>
-    </li>
     <!-- سجل التعديلات -->
-    <li class="has-sub">
+    {{-- <li class="has-sub">
         <div class="menu-title sub-title">
             <span class="icon">سجل التعديلات ⏱️</span>
         </div>
-    </li>
+    </li> --}}
     <!-- قسم الاداره العسكريه -->
-    <li class="has-sub">
+    {{-- <li class="has-sub">
         <div class="menu-title sub-title">
             <span class="icon">قسم الادارة العسكرية</span>
             <span class="arrow">⌄</span>
         </div>
         <ul class="sub">
-                <li class="has-sub">
+            <li class="has-sub">
                 <div class="menu-title sub-title">
                     <span class="icon">🛡️</span> الشهداء والمصابين
                     <span class="arrow">⌄</span>
@@ -333,22 +262,7 @@
                 </div>
             </li>
         </ul>
-    </li>
-
-    <!-- 2. منظومة الراتب العالي -->
-    <li class="has-sub">
-        <div class="menu-title sub-title">
-            <span class="icon">💰</span> منظومة الراتب العالي
-            <span class="arrow">⌄</span>
-        </div>
-        <ul class="sub">
-            <li><a href="#">منظومة الراتب العالى</a></li>
-            <li><a href="#">أداة متطورة</a></li>
-            <li><a href="#">البواقي</a></li>
-            <li><a href="#">المؤثرات</a></li>
-            <li><a href="#">إضافة راتب عالي</a></li>
-        </ul>
-    </li>
+    </li> --}}
 
     <!-- 3. الملاحق -->
     <li class="has-sub">
@@ -357,12 +271,12 @@
             <span class="arrow">⌄</span>
         </div>
         <ul class="sub">
-            <li><a href="#">الملاحق الداخلية</a></li>
-            <li><a href="#">الملاحق الخارجية</a></li>
-            <li><a href="#">حفظ سلام داخل البلاد</a></li>
-            <li><a href="#">حفظ سلام خارج البلاد</a></li>
-            <li><a href="#">سفر خارج البلاد</a></li>
-            <li><a href="#">عرض + أجازة</a></li>
+
+            <li> <a href="{{ route('mala7e2dakhly') }}"> الملاحق الداخلية </a> </li>
+            <li> <a href="{{ route('mala7e25argy') }}"> الملاحق الخارجية </a> </li>
+            <li> <a href="{{ route('inside7efzsalam') }}"> حفظ سلام داخل البلاد</a> </li>
+            <li> <a href="{{ route('outside7efzsalam') }}"> حفظ سلام خارج البلاد</a> </li>
+            <li> <a href="{{ route('3rdwagaza') }}"> عرض + أجازة</a> </li>
         </ul>
     </li>
 
@@ -381,7 +295,7 @@
     <!-- 5. الرفت -->
     <li class="has-sub">
         <div class="menu-title sub-title">
-            <span class="icon">📈</span> الرفت
+            <span class="icon">📈</span> الرفتّ
             <span class="arrow">⌄</span>
         </div>
         <ul class="sub">
@@ -417,18 +331,18 @@
                     <span class="arrow">⌄</span>
                 </div>
                 <ul class="sub">
-                    <li><a href="#">إجمالي الملاحق</a></li>
-                    <li><a href="#">الملاحق الداخلية</a></li>
-                    <li><a href="#">الملاحق الخارجية</a></li>
-                    <li><a href="#">حفظ سلام داخل البلاد</a></li>
-                    <li><a href="#">حفظ سلام خارج البلاد</a></li>
-                    <li><a href="#">سفر خارج البلاد</a></li>
-                    <li><a href="#">عرض + أجازة</a></li>
+                    <li><a href=" {{ route('totalmala7e2') }} ">إجمالي الملاحق</a></li>
+                    <li><a href=" {{ route('insidemal7e22') }} ">الملاحق الداخلية</a></li>
+                    <li><a href=" {{ route('outsidemal7e22') }} ">الملاحق الخارجية</a></li>
+                    <li><a href=" {{ route('3ddy7efzsalam') }} "> حفظ سلام داخل البلاد </a></li>
+                    <li><a href=" {{ route('7efzsalam5areg') }} "> حفظ سلام خارج البلاد </a></li>
+                    <li><a href=" {{ route('3ddysafr') }} "> سفر خارج البلاد </a></li>
+                    <li><a href=" {{ route('3ddy3ardwagaza') }} ">عرض + أجازة </a></li>
                 </ul>
             </li>
 
-            <li><a href="#">الامداد باليوم</a></li>
-            <li><a href="#">إجمالي المرحلة</a></li>
+            <li><a href=" {{ route('2mdadyaomee') }} "> الامداد اليومى </a></li>
+            <li><a href=" {{ route('egmalymar7ala') }} "> إجمالي المرحلة </a></li>
         </ul>
     </li>
 
@@ -529,6 +443,7 @@
                 </ul>
             </li>
 
+
             <!-- 6. يوميات عددية -->
             <li class="has-sub">
                 <div class="menu-title sub-title">
@@ -570,24 +485,6 @@
         </ul>
     </li>
 
-    <!-- أجهزة الفرع (من الكود الأصلي العلوي) -->
-    <li class="has-sub">
-        <div class="menu-title">
-            <div>
-                <span class="icon">🖥️</span>
-                أجهزة الفرع
-            </div>
-            <span class="arrow">⌄</span>
-        </div>
-        <ul class="sub">
-            <li><a href="#">قائد الفرقة</a></li>
-            <li><a href="#">جهاز الأفراد</a></li>
-            <li><a href="#">جهاز الأرشيف</a></li>
-            <li><a href="#">جهاز البيانات</a></li>
-            <li><a href="#">جهاز القطاع</a></li>
-            <li><a href="#">جهاز شئون ضباط</a></li>
-        </ul>
-    </li>
 
     <!-- قسم الأرشيف (من الكود الأصلي العلوي) -->
     <li class="has-sub">
@@ -605,9 +502,13 @@
                     <span class="arrow">⌄</span>
                 </div>
                 <ul class="sub">
-                    <li><a href="#">عرض الفاكسات</a></li>
-                    <li><a href="#">أرشيف الفاكسات</a></li>
-                    <li><a href="#">إضافة فاكس</a></li>
+                    <li> <a href="{{ route('3rdfaxat') }}"> عرض الفاكسات </a> </li>
+                    <li> <a href="{{ route('archivefaxat') }}"> ارشيف الفاكسات </a> </li>
+                    <li> <a href="{{ route('newfile') }}"> إضافة فاكس </a> </li>
+
+
+
+
                 </ul>
             </li>
             <li class="has-sub">
@@ -621,15 +522,17 @@
                     <li><a href="#">إضافة متأخرات</a></li>
                 </ul>
             </li>
+
+
+
+
+
+
         </ul>
 
+
+
     </li>
-
-
-
-
-
-
 
     <li class="has-sub">
         <div class="menu-title sub-title">
@@ -642,11 +545,38 @@
             <li><a href="#">إضافة متأخرات</a></li>
         </ul>
     </li>
-    </ul>
 
+
+
+    <li class="has-sub">
+        <div class="menu-title sub-title">
+            <span class="icon">⏳</span> البيانات
+            <span class="arrow">⌄</span>
+        </div>
+        <ul class="sub">
+            <li><a href=" {{ route('mawkefshary') }}  "> الموقف الشهري </a></li>
+            <li><a href=" {{ route('moratb7arb') }}  "> مرتبات الحرب </a></li>
+            <li><a href=" {{ route('moratbeslm') }}  "> مرتبات السلم </a></li>
+
+        </ul>
     </li>
 
 
-    </ul>
 
+    {{-- <li class="has-sub">
+        <div class="menu-title sub-title">
+            <span class="icon">⏳</span> المتابعة
+            <span class="arrow">⌄</span>
+        </div>
+        <ul class="sub">
+
+
+            <li><a href=" {{ route('elraftrateb3aly') }}  "> الرفت - راتب عالي </a></li>
+            <li><a href=" {{ route('elraftgnood') }}  "> الرفت - جنود</a></li>
+
+        </ul>
+    </li> --}}
+    </ul>
+    </li>
+    </ul>
 </div>
