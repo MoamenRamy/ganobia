@@ -2,12 +2,12 @@
 @section('content')
 <div class="place-portlet w-full">
     <div class="place-portlet-title">
-        <span>اماكن الالحاق (مقسمة)</span>
+        <span>كل اماكن الالحاق</span>
     </div>
 
     <div class="place-portlet-body">
 
-        <a href="{{ route('attachment-places.create') }}" class="place-btn-add">
+        <a href="{{ route('places.create') }}" class="place-btn-add">
             + إضافة جديد
         </a>
 
@@ -22,19 +22,19 @@
             </thead>
 
             <tbody>
-                @foreach ($attachmentPlaces as $attachmentPlace)
+                @foreach ($places as $place)
                 <tr>
-                    <td class="place-col-id">{{ $attachmentPlace->id }}</td>
+                    <td class="place-col-id">{{ $place->id }}</td>
                     <td>
-                        <a href="{{ route('attachment-places.show', $attachmentPlace->id) }}">
-                            {{ $attachmentPlace->name }}</td>
-                        </a>
+                        {{-- <a href="{{ route('attachment-place.show', $place->id) }}"> --}}
+                            {{ $place->name }}</td>
+                        {{-- </a> --}}
                     <td>
 
-                        <a href="{{ route('attachment-places.edit', $attachmentPlace->id) }}">
+                        <a href="{{ route('places.edit', $place->id) }}">
                             <button class="place-btn-edit">تعديل</button>
                         </a>
-                        <form action="{{ route('attachment-places.destroy', $attachmentPlace->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('places.destroy', $place->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button class="place-btn-delete" onclick="return confirm('حذف؟')">حذف</button>
@@ -47,6 +47,10 @@
 
         </table>
 
+    </div>
+
+    <div class="mt-3">
+        {{ $places->links() }}
     </div>
 </div>
 @endsection

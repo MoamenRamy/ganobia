@@ -2,12 +2,7 @@
 =============================✔Afrad System✔======================
 ===================================================================
 
-
-finish view middleware
-
-finish admin sys
-
-cache soldiers and volunteers
+كل المسلسلات ب ال id بتاعها عادى الا الجنود و الراتب العالى
 
 search and filters
 
@@ -15,5 +10,6 @@ future add to (need select fields)
 
 select item to make action
 
+cache soldiers and volunteers
 
 ===================================================================

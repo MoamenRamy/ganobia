@@ -4,7 +4,7 @@
 
 <div class="form-container">
     <div class="form-header">
-        <h2>تعديل القطاع / اللواء</h2>
+        <h2>تعديل الوحدة</h2>
         <p>يرجى إدخال البيانات بعناية قبل الحفظ</p>
     </div>
 
@@ -43,7 +43,7 @@
                         @endforeach
                     </select>
                 </div>
-                
+
                 {{-- المرتب --}}
                 <div class="form-group">
                     <label for="moratab">المرتب</label>

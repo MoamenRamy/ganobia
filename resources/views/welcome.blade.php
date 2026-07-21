@@ -10,9 +10,9 @@
                     <!-- CARDS -->
                     <div class="home-cards">
                         @can('view-rateb3aly')
-                        <a href="{{ route('volunteers.index') }}" target="_blank">
+                        <a href="{{ route('volunteers.index') }}">
                             <div class="home-card home-c1">
-                                <h2>120</h2>
+                                {{-- <h2>120</h2> --}}
                                 <p>الراتب العالى</p>
                                 <button class="home-details-btn">اعرض التفاصيل</button>
                             </div>
@@ -20,16 +20,16 @@
                         @endcan
 
                         @can('view-moganaden')
-                        <a href="{{ route('soldiers.index') }}" target="_blank">
+                        <a href="{{ route('soldiers.index') }}">
                             <div class="home-card home-c2">
-                                <h2>90</h2>
+                                {{-- <h2>90</h2> --}}
                                 <p>الجنود</p>
                                 <button class="home-details-btn">اعرض التفاصيل</button>
                             </div>
                         </a>
                         @endcan
-                        
-                        <a href="{{ route('3rdfaxat') }}" target="_blank">
+
+                        <a href="{{ route('3rdfaxat') }}">
                             <div class="home-card home-c3">
                                 <h2>45</h2>
                                 <p>الفاكسات</p>
@@ -37,7 +37,7 @@
                             </div>
                         </a>
 
-                        <a href="{{ route('mala7e2dakhly') }}" target="_blank">
+                        <a href="{{ route('mala7e2dakhly') }}">
                             <div class="home-card home-c4">
                                 <h2>10</h2>
                                 <p>الملاحق الداخلية</p>
@@ -45,7 +45,7 @@
                             </div>
                         </a>
 
-                        <a href="{{ route('mala7e25argy') }}" target="_blank">
+                        <a href="{{ route('mala7e25argy') }}">
                             <div class="home-card home-c5">
                                 <h2>300</h2>
                                 <p>الملاحق الخارجية</p>
@@ -53,7 +53,7 @@
                             </div>
                         </a>
 
-                        <a href="{{ route('2mdadyaomee') }}" target="_blank">
+                        <a href="{{ route('2mdadyaomee') }}">
                             <div class="home-card home-c6">
                                 <h2>20</h2>
                                 <p>الإمداداليومى</p>
@@ -61,7 +61,7 @@
                             </div>
                         </a>
 
-                        <a href="{{ route('soldiers.index') }}" target="_blank">
+                        <a href="{{ route('soldiers.index') }}">
                             <div class="home-card home-c7">
                                 <h2>55</h2>
                                 <p>التوصيات</p>
@@ -69,7 +69,7 @@
                             </div>
                         </a>
 
-                        <a href="{{ route('soldiers.index') }}" target="_blank">
+                        <a href="{{ route('soldiers.index') }}">
                             <div class="home-card home-c8">
                                 <h2>18</h2>
                                 <p>الإنتقاء</p>
@@ -77,7 +77,7 @@
                             </div>
                         </a>
 
-                        <a href="{{ route('soldiers.index') }}" target="_blank">
+                        <a href="{{ route('soldiers.index') }}">
                             <div class="home-card home-c9">
                                 <h2>7</h2>
                                 <p>ما تم تسجيله</p>

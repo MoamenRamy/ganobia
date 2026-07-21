@@ -6,7 +6,7 @@
         <div class="rateb-header-right">
             <div class="rateb-page-title">
                 <i></i>
-                <span>الراتب العالي</span>
+                <span>أرشيف الراتب العالي</span>
             </div>
         </div>
         <div class="rateb-header-left">

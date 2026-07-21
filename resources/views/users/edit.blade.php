@@ -5,7 +5,7 @@
 <div class="form-container" style="width: 60%">
     <div class="form-header">
         <h2>تعديل المستخدم</h2>
-        <p>يرجى مراجع   ة البيانات قبل الحفظ</p>
+        <p>يرجى مراجعة البيانات قبل الحفظ</p>
     </div>
 
     @if ($errors->any())

@@ -64,9 +64,9 @@ Route::delete('/governments/{government}', [GovernmentController::class, 'destro
 
 // volunteers
 // Route::resource('volunteers', VolunteerController::class);
-Route::get('/volunteers/import-excel', [VolunteerController::class, 'importPage'])->name('volunteers.importPage');
-Route::post('/volunteers/import',[VolunteerController::class, 'import'])->name('volunteers.import');
-Route::get('/volunteers/export',[VolunteerController::class, 'export'])->name('volunteers.export');
+Route::get('/volunteers/import-excel', [VolunteerController::class, 'importPage'])->name('volunteers.importPage')->middleware('role:1,2,4');
+Route::post('/volunteers/import',[VolunteerController::class, 'import'])->name('volunteers.import')->middleware('role:1,2,4');
+Route::get('/volunteers/export',[VolunteerController::class, 'export'])->name('volunteers.export')->middleware('role:1,2,4');
 Route::get('/volunteers', [VolunteerController::class, 'index'])->name('volunteers.index')->middleware('role:1,2,4');
 Route::get('/volunteers/create', [VolunteerController::class, 'create'])->name('volunteers.create')->middleware('role:1,2,4');
 Route::post('/volunteers', [VolunteerController::class, 'store'])->name('volunteers.store')->middleware('role:1,2,4');
@@ -97,10 +97,9 @@ Route::delete('/roles/{role}', [RoleController::class, 'destroy'])->name('roles.
 
 // soldiers
 // Route::resource('soldiers', SoldierController::class);
-Route::get('/soldiers/import-excel', [SoldierController::class, 'importPage'])->name('soldiers.importPage');
-Route::post('/soldiers/import-excel', [SoldierController::class, 'import'])->name('soldiers.import');
-// Route::get('/soldiers/import-report', [SoldierController::class, 'importReport'])->name('soldiers.import-report');
-Route::get('/soldiers/export',[SoldierController::class, 'export'])->name('soldiers.export');
+Route::get('/soldiers/import-excel', [SoldierController::class, 'importPage'])->name('soldiers.importPage')->middleware('role:1,2,3');
+Route::post('/soldiers/import-excel', [SoldierController::class, 'import'])->name('soldiers.import')->middleware('role:1,2,3');
+Route::get('/soldiers/export',[SoldierController::class, 'export'])->name('soldiers.export')->middleware('role:1,2,3');
 Route::get('/soldiers', [SoldierController::class, 'index'])->name('soldiers.index')->middleware('role:1,2,3');
 Route::get('/soldiers/create', [SoldierController::class, 'create'])->name('soldiers.create')->middleware('role:1,2,3');
 Route::post('/soldiers', [SoldierController::class, 'store'])->name('soldiers.store')->middleware('role:1,2,3');

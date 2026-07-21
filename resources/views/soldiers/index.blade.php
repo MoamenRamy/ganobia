@@ -170,31 +170,6 @@
         عدد النتائج: {{ $soldiers->count() }}
     </div>
 
-    {{-- <table class="table">
-    <thead>
-        الرقم العسكرى
-    </thead>
-    <tbody>
-        <tr class="table-active">
-        الرقم العسكرى
-        </tr>
-        <tr>
-        الاسم
-        </tr>
-        @foreach($soldiers as $soldier)
-        <tr>
-        <th scope="row">3</th>
-        <td>{{$soldier->military_number}}</td>
-        <td>{{ $soldier->name }}</td>
-        <td class="table-active">@social</td>
-        </tr>
-        @endforeach
-    </tbody>
-    </table> --}}
-
-
-
-
     <div class="table-container">
         <table class="data-table">
             <thead>

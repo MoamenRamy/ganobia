@@ -4,7 +4,7 @@
 
 <div class="form-container">
     <div class="form-header">
-        <h2>إضافة وحدة جديد</h2>
+        <h2>إضافة وحدة جديدة</h2>
         <p>يرجى إدخال البيانات بعناية قبل الحفظ</p>
     </div>
 
@@ -34,7 +34,7 @@
                     <label for="sector_id">القطاع</label>
                     <select id="sector_id" name="sector_id" class="form-select">
                         <option value="">اختر القطاع</option>
-                        
+
                         @foreach($sectors as $sec)
                             <option value="{{ $sec->id }}"
                                 @selected(old('sector_id', $sector?->id) == $sec->id)>

@@ -2,7 +2,7 @@
 @section('content')
 <div class="weapons-portlet w-full">
     <div class="weapons-portlet-title">
-        <span>الصلاحيات</span>
+        <span>التخصصات</span>
     </div>
 
     <div class="weapons-portlet-body">
@@ -38,6 +38,9 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="mt-3">
+        {{ $specialties->links() }}
     </div>
 </div>
 @endsection

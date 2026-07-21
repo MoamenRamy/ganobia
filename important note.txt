@@ -1,0 +1,11 @@
+### ADD AR LANG
+λ php artisan lang:publish
+λ composer require laravel-lang/common
+λ php artisan lang:add ar
+
+EXEL import&export
+selected iteam
+action on selected iteam
+search
+filter
+middleware (role, can view)

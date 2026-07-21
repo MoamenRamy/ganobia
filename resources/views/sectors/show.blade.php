@@ -37,9 +37,9 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>
-                        <a href="{{ route('units.show', $unit->id) }}">
+                        {{-- <a href="{{ route('units.show', $unit->id) }}"> --}}
                             {{ $unit->name }}
-                        </a>
+                        {{-- </a> --}}
                     </td>
 
 

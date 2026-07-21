@@ -13,6 +13,33 @@
 
         <!-- قسم الأفراد (القسم الرئيسي المدمج) -->
 
+        {{-- <li class="has-sub">
+            <div class="menu-title sub-title">
+                <span class="icon">🔄</span> لوحة التحكم
+                <span class="arrow">⌄</span>
+            </div> --}}
+            <ul class="no-sub" style="margin-top: 20px">
+                @can('view-admin')
+                <li> <a href="{{ route('users.index') }}">المستخدمين</a> </li>
+                @endcan
+                @can('view-moganaden')
+                <li> <a href="{{ route('soldiers.index') }}">الجنود</a> </li>
+                <li> <a href="{{ route('archives.index') }}">أرشيف الجنود</a> </li>
+                @endcan
+                @can('view-rateb3aly')
+                <li> <a href="{{ route('volunteers.index') }}">الراتب العالى</a> </li>
+                <li> <a href="{{ route('archive-volunteers.index') }}">ارشيف الراتب العالى</a> </li>
+                @endcan
+                <li> <a href="{{ route('sectors.index') }}">القطاعات</a> </li>
+                <li> <a href="{{ route('units.index') }}">الوحدات</a> </li>
+                <li> <a href="{{ route('specialties.index') }}">التخصصات</a> </li>
+                <li> <a href="{{ route('weapons.index') }}">الأسلحة</a> </li>
+                <li> <a href="{{ route('governments.index') }}">المحافظات</a> </li>
+                <li> <a href="{{ route('attachment-places.index') }}">اماكن الالحاق (مقسمة)</a> </li>
+                <li> <a href="{{ route('places.index') }}">كل اماكن الالحاق</a> </li>
+            </ul>
+        {{-- </li> --}}
+
         <li class="has-sub">
             <div class="menu-title">
                 <div>
@@ -23,7 +50,6 @@
             </div>
 
             <ul class="sub">
-
                 <!-- 1. منظومة الجنود -->
                 <li class="has-sub">
                     <div class="menu-title sub-title">
