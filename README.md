@@ -1,59 +1,400 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Ganobia Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A comprehensive **military personnel and administrative management system** built with **Laravel 12**, designed to organize and manage units, sectors, soldiers, volunteers, archives, weapons, specialties, locations, and related administrative data through a role-based web interface.
 
-## About Laravel
+The system focuses on structured data management, administrative workflows, role-based access control, Excel import/export, and centralized personnel records.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 👥 Personnel Management
 
-## Learning Laravel
+* Manage soldiers and volunteers
+* Create, view, update, and delete personnel records
+* Store personal and administrative information
+* Track enlistment and discharge dates
+* Manage attendance and other personnel attributes
+* Organize personnel by sector and unit
+* Assign weapons and specialties
+* Manage attachment/assignment locations
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 🪖 Military Structure
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* Manage sectors
+* Manage units
+* Connect units with their corresponding sectors
+* Organize personnel according to the military structure
 
-## Laravel Sponsors
+### 🗃️ Archives
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+* Manage soldier archives
+* Manage volunteer archives
+* View archived personnel records
+* Update and delete archive records
+* Role-based access to archive operations
 
-### Premium Partners
+### 🔫 Weapons & Specialties
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+* Manage weapons
+* Assign weapons to soldiers
+* Manage military specialties
+* Connect personnel with their assigned specialization
 
-## Contributing
+### 📍 Locations
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+* Manage attachment/assignment locations
+* Manage governorates
+* Associate personnel with their locations
+* Organize personnel based on administrative placement
 
-## Code of Conduct
+### 📊 Excel Import & Export
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+The system supports importing and exporting personnel data using Excel files.
 
-## Security Vulnerabilities
+* Import soldiers from Excel
+* Import volunteers from Excel
+* Export soldiers
+* Export volunteers
+* Handle large amounts of personnel data through spreadsheet workflows
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 🔐 Role-Based Access Control
 
-## License
+Different system operations are protected using role-based middleware.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Examples include:
+
+* User management restricted to authorized roles
+* Administrative CRUD operations protected by roles
+* Personnel management controlled by specific roles
+* Archive access controlled by role permissions
+* Role management restricted to administrators
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology        | Purpose                          |
+| ----------------- | -------------------------------- |
+| PHP 8.2+          | Backend language                 |
+| Laravel 12        | Web application framework        |
+| Laravel Jetstream | Authentication & user management |
+| Laravel Sanctum   | API authentication support       |
+| Livewire 3        | Interactive UI components        |
+| MySQL             | Database                         |
+| Laravel Eloquent  | ORM & database relationships     |
+| Laravel Excel     | Excel import/export              |
+| Blade             | Server-side templating           |
+| JavaScript        | Frontend interactions            |
+| Vite              | Asset bundling                   |
+| PHPUnit           | Automated testing                |
+
+---
+
+## 🏗️ Architecture
+
+The project follows Laravel's MVC architecture.
+
+```text
+ganobia/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   └── Middleware/
+│   ├── Models/
+│   └── ...
+│
+├── database/
+│   ├── migrations/
+│   ├── seeders/
+│   └── factories/
+│
+├── resources/
+│   ├── views/
+│   ├── css/
+│   └── js/
+│
+├── routes/
+│   ├── web.php
+│   └── ...
+│
+├── public/
+├── storage/
+├── tests/
+├── composer.json
+└── package.json
+```
+
+---
+
+## 🗄️ Main Data Relationships
+
+The system uses Laravel Eloquent relationships to connect the main entities.
+
+```text
+Sector
+  │
+  └── Unit
+       │
+       ├── Soldiers
+       │    ├── Weapon
+       │    ├── Specialty
+       │    ├── Governorate
+       │    └── Attachment Place
+       │
+       └── Volunteers
+```
+
+Examples of implemented relationships include:
+
+* `Unit → Sector`
+* `Soldier → Sector`
+* `Soldier → Unit`
+* `Soldier → Weapon`
+* `Soldier → Specialty`
+* `Soldier → Governorate`
+* `Soldier → Attachment Place`
+
+---
+
+## 🔑 Authentication & Authorization
+
+The application uses **Laravel Jetstream** for authentication and implements role-based authorization through middleware.
+
+Administrative routes are protected using role middleware such as:
+
+```php
+->middleware('role:1,2')
+```
+
+or:
+
+```php
+->middleware('role:1,2,3')
+```
+
+This allows different users to access different parts of the management system according to their assigned role.
+
+---
+
+## 📥 Excel Import
+
+Personnel data can be imported directly from Excel files.
+
+Example workflow:
+
+```text
+Excel File
+    ↓
+Upload
+    ↓
+Validation
+    ↓
+Import
+    ↓
+Database
+    ↓
+Personnel Management
+```
+
+The project uses:
+
+```text
+maatwebsite/excel
+```
+
+for spreadsheet processing.
+
+---
+
+## 📤 Excel Export
+
+The application also provides export functionality for personnel records, allowing administrators to generate Excel files from the stored database information.
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/MoamenRamy/ganobia.git
+
+cd ganobia
+```
+
+### 2. Install PHP dependencies
+
+```bash
+composer install
+```
+
+### 3. Create environment file
+
+```bash
+cp .env.example .env
+```
+
+On Windows, you can also create a copy manually:
+
+```text
+.env.example → .env
+```
+
+### 4. Generate application key
+
+```bash
+php artisan key:generate
+```
+
+### 5. Configure the database
+
+Update your `.env` file:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+### 6. Run migrations
+
+```bash
+php artisan migrate
+```
+
+### 7. Install frontend dependencies
+
+```bash
+npm install
+```
+
+### 8. Build frontend assets
+
+```bash
+npm run build
+```
+
+For development:
+
+```bash
+npm run dev
+```
+
+### 9. Start the application
+
+```bash
+php artisan serve
+```
+
+The application will be available at:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+## 🧪 Testing
+
+Run the Laravel test suite with:
+
+```bash
+php artisan test
+```
+
+Or:
+
+```bash
+composer test
+```
+
+---
+
+## 🔒 Environment & Security
+
+Do not commit sensitive environment variables to GitHub.
+
+The following values should remain private:
+
+```env
+APP_KEY=
+DB_PASSWORD=
+MAIL_PASSWORD=
+API_KEYS=
+```
+
+Use `.env.example` as the template for local configuration.
+
+---
+
+## 📌 Project Purpose
+
+Ganobia was developed as a practical Laravel management system demonstrating how a complex administrative application can be structured around:
+
+* Relational database design
+* MVC architecture
+* Role-based authorization
+* CRUD operations
+* Personnel management
+* Excel data processing
+* Eloquent relationships
+* Authentication
+* Administrative workflows
+* Server-side rendered interfaces
+
+---
+
+## 📚 Key Laravel Concepts Demonstrated
+
+This project demonstrates practical experience with:
+
+* Laravel 12
+* MVC architecture
+* Eloquent ORM
+* Model relationships
+* Middleware
+* Role-based authorization
+* Resource-style CRUD operations
+* Form handling
+* Validation
+* Authentication
+* Laravel Jetstream
+* Laravel Sanctum
+* Livewire
+* Database migrations
+* Seeders
+* Excel import/export
+* PHPUnit testing
+* Vite asset management
+
+---
+
+## 👨‍💻 Author
+
+**Moamen Ramy**
+
+Back-End Engineer specializing in:
+
+* PHP
+* Laravel
+* MySQL
+* Python
+* Django
+* REST APIs
+* Database Design
+* Backend Development
+
+### Connect
+
+* GitHub: [@MoamenRamy](https://github.com/MoamenRamy)
+* LinkedIn: [Moamen Ramy](https://www.linkedin.com/in/moamen-ramy-492a8b212/)
+
+---
+
+## ⭐ Support
+
+If you find this project useful or interesting, consider giving it a ⭐ on GitHub.
